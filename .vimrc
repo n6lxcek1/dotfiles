@@ -12,8 +12,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'vimoutliner/vimoutliner'
 Plugin 'roggan87/vim-bible'
 
 " The following are examples of different formats supported.
