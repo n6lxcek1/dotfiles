@@ -22,7 +22,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'edkolev/tmuxline.vim'
+"Plugin 'edkolev/tmuxline.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -67,13 +67,16 @@ vnoremap <leader>b y :call Bible(@+)<CR>
 " CtrlP
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_working_path_mode = ''
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_show_hidden = 1
 
 "vim-airline
 set laststatus=2                             " to always display statusbar
 let g:airline#extensions#tabline#enabled = 1 " to display buffers like tabs when only one tab exists
 let g:airline_powerline_fonts = 1            " to automaically populate g:airline_symbols
+
+" vim-markdown
+let g:vim_markdown_toc_autofit = 1
 
 "Tabs
 set listchars=tab:▸\ ,eol:¬
@@ -106,10 +109,12 @@ autocmd InsertLeave * :set relativenumber     " Switch between relative and abso
 " Vimrc
 
 " Source the vimrc file after saving it and refresh Airline
-function SourceAndRefresh()
-  source $MYVIMRC
-  AirlineRefresh
-endfunction
+if !exists("*SourceAndRefresh")
+  function SourceAndRefresh()
+    source $MYVIMRC
+    AirlineRefresh
+  endfunction
+endif
 
 " Automatically see the changes
 if has("autocmd")
@@ -166,10 +171,23 @@ set wildmode=longest,list
 " More consistent copy... after all you already have yy
 nnoremap Y y$
 
+" Mouse
+set mouse=a
+
+" Some key maps
+" Buffers
+:nmap <C-k> :bnext<CR>
+:nmap <C-j> :bprev<CR>
+:nmap <C-i> :b#<CR>
+:nmap <C-x> :bd<CR>
+
+:nmap <leader>t :Tabularize /
+:nmap <leader>o :Toc<CR>
+
 " For saving folds and loading them automatically
 autocmd BufWritePost,BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
-set viewoptions=cursor,folds,slash,unix     " for not saving to the working directory
+"set viewoptions=cursor,folds,slash,unix     " for not saving to the working directory
 
 " Things to do on first install
 
