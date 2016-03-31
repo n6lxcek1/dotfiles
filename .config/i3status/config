@@ -70,5 +70,7 @@ disk "/" {
 
 cpu_temperature 0 {
         format = "T: %degrees °C"
-        path = "/sys/devices/platform/coretemp.0/temp1_input"
+        #path = "/sys/devices/platform/coretemp.0/temp1_input"
+        path = "/sys/bus/acpi/devices/LNXCPU\:01/thermal_cooling/subsystem/thermal_zone0/temp"
 }
+

@@ -176,8 +176,8 @@ set mouse=a
 
 " Some key maps
 " Buffers
-:nmap <C-k> :bnext<CR>
-:nmap <C-j> :bprev<CR>
+:nmap <C-l> :bnext<CR>
+:nmap <C-h> :bprev<CR>
 :nmap <C-i> :b#<CR>
 :nmap <C-x> :bd<CR>
 
