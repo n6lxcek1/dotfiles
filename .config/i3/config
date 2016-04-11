@@ -69,14 +69,13 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 #bindsym $mod+h split h
-bindsym $mod+b split h
+#bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -161,6 +160,7 @@ bar {
 # Personal Configurations #
 ################################
 
+exec_always setxkbmap -option compose:ralt #set compose key as right alt
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 
@@ -170,8 +170,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -set 100 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -set 1 # decrease screen brightness
 
 # Touchpad controls
 #bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -183,4 +185,24 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # For print screen
-bindsym Print exec scrot -e 'mv $f ~/Pictures/Screenshots'
+bindsym Print exec scrot -e 'mv $f ~/Pictures/Screenshots/'
+
+# switch between the current and the previously focused one
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth
+
+## Manual management of external displays
+# Set the shortcuts and what they do
+set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output VGA1 --auto --right-of eDP1, mode "default"
+    bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1, mode "default"
+    bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+    bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Declare here the shortcut to bring the display selection menu
+bindsym $mod+x mode "$mode_display"

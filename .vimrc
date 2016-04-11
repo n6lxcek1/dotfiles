@@ -22,6 +22,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'Recover.vim'
 "Plugin 'edkolev/tmuxline.vim'
 
 " The following are examples of different formats supported.
