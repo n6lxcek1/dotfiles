@@ -8,8 +8,8 @@
 alias ls='ls --color=auto'
 
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
-VISUAL='runvim'
-EDITOR='runvim'
+VISUAL='gvim --nofork'
+EDITOR='gvim --nofork'
 #PS1='[\u@\h \W]\$ '  # Default
 #PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] ' # Green User
 #VISUAL='vim'

@@ -69,7 +69,7 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 #bindsym $mod+h split h
-#bindsym $mod+b split h
+bindsym $mod+c split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -163,6 +163,7 @@ bar {
 exec_always setxkbmap -option compose:ralt #set compose key as right alt
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
+exec_always ip link set wlp2s0 down
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
@@ -193,14 +194,19 @@ bindsym $mod+Shift+b move container to workspace back_and_forth
 
 ## Manual management of external displays
 # Set the shortcuts and what they do
-set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF, (s) Suspend, (r) Reboot
+set $mode_display [V]GA On, [H]DMI On, V[G]A Off, H[D]MI Off, [S]uspend, [R]eboot, [P]owerOff, reset [M]ouse
 mode "$mode_display" {
     bindsym v exec --no-startup-id xrandr --output VGA1 --auto --right-of eDP1, mode "default"
     bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --right-of eDP1, mode "default"
-    bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
-    bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+    bindsym g exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+    bindsym d exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
     bindsym s exec --no-startup-id i3lock && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+    # modprobe is in sudoers NOPASSWORD as
+    # %users ALL = NOPASSWD: /usr/sbin/pm-suspend
+    # on /etc/sudoers edited with visudo
+    bindsym m exec --no-startup-id modprobe -r i2c_hid && modprobe i2c_hid, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"

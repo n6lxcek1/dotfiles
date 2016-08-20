@@ -35,6 +35,9 @@ fi
 #xterm -geometry 80x20+494-0 &
 #exec xterm -geometry 80x66+0+0 -name login
 
-ip link set wlp2s0 down &
+#ip link set wlp2s0 down &
 redshift-gtk &
+pasystray &
+udiskie &
+gnome-keyring-daemon –start & ##for handling web certificates
 exec i3
